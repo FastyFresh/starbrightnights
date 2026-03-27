@@ -1,5 +1,6 @@
 import { Layout } from "@/components/Layout";
 import { Lock, ArrowRight, ExternalLink } from "lucide-react";
+import { trackEvent } from "../lib/analytics";
 
 export default function Exclusive() {
   return (
@@ -28,9 +29,9 @@ export default function Exclusive() {
             <button
               className="btn btn-primary"
               style={{ padding: '16px 32px', fontSize: '18px', width: '100%', maxWidth: '320px' }}
-              onClick={() => window.open("https://dfans.co/starbrightnight", "_blank", "noopener,noreferrer")}
+              onClick={() => { trackEvent("outbound_click", "telegram", "exclusive_cta"); window.open("https://t.me/StarbrightMonroe", "_blank", "noopener,noreferrer"); }}
             >
-              Continue to Site <ArrowRight size={20} />
+              Chat with me on Telegram 💋 <ArrowRight size={20} />
             </button>
             
             {/* Micro-conversion copy */}
@@ -48,7 +49,7 @@ export default function Exclusive() {
              <button
               className="btn btn-ghost"
               style={{ fontSize: '14px', padding: '10px 20px', border: 'none' }}
-              onClick={() => window.open("https://t.me/StarbrightMonroeBot", "_blank", "noopener,noreferrer")}
+              onClick={() => { trackEvent("outbound_click", "telegram_bot", "exclusive_bot_link"); window.open("https://t.me/StarbrightMonroeBot", "_blank", "noopener,noreferrer"); }}
             >
               Get updates on Telegram <ExternalLink size={14} />
             </button>
