@@ -1,0 +1,65 @@
+Goal: Update the Starbright Nights site to match best-practice creator funnels: high-trust, lifestyle-photo-forward, soft-glam pink aesthetic, fast load, and strong click-through to /exclusive and optional Telegram—without auto-redirects.
+
+Requirements
+	1.	Hero background + color system
+
+	•	Replace current dark theme with a soft pink + warm neutral palette.
+	•	Background: layered gradient with subtle noise (CSS) and/or blurred blobs.
+	•	Use accessible contrast for text (don’t wash out the copy).
+
+	2.	Add photos
+
+	•	Add 1 primary hero image on Home page (right side on desktop, above fold on mobile).
+	•	Add a 3–6 image “preview grid” section below the fold (“Latest looks” / “Recent moments”).
+	•	Images must be optimized:
+	•	Use local assets in client/src/assets/ (or public/ depending on current setup).
+	•	Prefer .webp where possible.
+	•	Add loading="lazy" for below-the-fold images.
+
+	3.	High-conversion layout (best practice)
+
+	•	Keep the copy neutral (“updates”, “behind-the-scenes”, “community”) — no explicit wording.
+	•	Above the fold must include:
+	•	H1 + short subhead
+	•	Primary CTA: Enter (goes to /exclusive)
+	•	Secondary CTA: Join Telegram (external)
+	•	Add a short “What you’ll get” section with 3 bullets (neutral).
+	•	Add “Works best if Telegram is your updates channel” as optional.
+
+	4.	Trust & compliance
+
+	•	Keep manual click to proceed (no instant redirect).
+	•	Keep footer with 18+, Privacy, Terms.
+	•	Add a small “Official hub” badge and a subtle “secure link”/“stable link” note.
+
+	5.	Tech constraints
+
+	•	Project currently uses routing with wouter and pages:
+	•	client/src/pages/home.tsx
+	•	client/src/pages/exclusive.tsx
+	•	client/src/pages/privacy.tsx
+	•	client/src/pages/terms.tsx
+	•	Implement changes using the existing structure (don’t rewrite the whole app).
+	•	Put colors + typography into a centralized CSS file (or Tailwind if already configured).
+	•	Ensure mobile-first, looks premium on 390px width.
+
+Assets
+	•	Create an assets folder and add placeholder images if none exist:
+	•	client/src/assets/hero.webp
+	•	client/src/assets/grid1.webp … grid6.webp
+	•	If you can’t generate images, use clearly labeled placeholders and wire them so I can swap later.
+
+Deliverables
+	•	Updated home.tsx with photo-led pink design and new sections.
+	•	Updated global styles (e.g., client/src/styles.css or equivalent) for the pink theme.
+	•	Minor style alignment on /exclusive to match new theme.
+	•	Confirm all routes still work and buttons link correctly.
+
+Acceptance Criteria
+	•	Home page shows a pink aesthetic with a hero photo and a preview grid.
+	•	Above-the-fold CTA is clear and clickable.
+	•	No auto-redirects.
+	•	Pages load fast, images optimized/lazy-loaded.
+	•	Mobile layout looks clean (no overlap, no tiny text).
+
+Proceed now and show me what files you changed and key snippets.

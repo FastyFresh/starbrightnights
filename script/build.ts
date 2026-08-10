@@ -1,46 +1,67 @@
-import { execSync } from "child_process";
-import * as esbuild from "esbuild";
-import path from "path";
-import { fileURLToPath } from "url";
+import { build as esbuild } from "esbuild";
+import { build as viteBuild } from "vite";
+import { rm, readFile } from "fs/promises";
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const root = path.resolve(__dirname, "..");
+// server deps to bundle to reduce openat(2) syscalls
+// which helps cold start times
+const allowlist = [
+  "@google/generative-ai",
+  "axios",
+  "connect-pg-simple",
+  "cors",
+  "date-fns",
+  "drizzle-orm",
+  "drizzle-zod",
+  "express",
+  "express-rate-limit",
+  "express-session",
+  "jsonwebtoken",
+  "memorystore",
+  "multer",
+  "nanoid",
+  "nodemailer",
+  "openai",
+  "passport",
+  "passport-local",
+  "pg",
+  "stripe",
+  "uuid",
+  "ws",
+  "xlsx",
+  "zod",
+  "zod-validation-error",
+];
 
-console.log("Building client with Vite...");
-execSync("npx vite build", { cwd: root, stdio: "inherit" });
+async function buildAll() {
+  await rm("dist", { recursive: true, force: true });
 
-console.log("Bundling server with esbuild...");
+  console.log("building client...");
+  await viteBuild();
 
-// Plugin to stub out the dev-only vite import
-const stubVitePlugin: esbuild.Plugin = {
-  name: "stub-vite-dev",
-  setup(build) {
-    // When server/index.ts does: import("./vite"), resolve it to a stub
-    build.onResolve({ filter: /^\.\/vite$/ }, (args) => {
-      if (args.resolveDir.includes("server")) {
-        return { path: "vite-dev-stub", namespace: "stub" };
-      }
-    });
-    build.onLoad({ filter: /.*/, namespace: "stub" }, () => {
-      return {
-        contents: `export async function setupVite() { throw new Error("Dev only"); }`,
-        loader: "js",
-      };
-    });
-  },
-};
+  console.log("building server...");
+  const pkg = JSON.parse(await readFile("package.json", "utf-8"));
+  const allDeps = [
+    ...Object.keys(pkg.dependencies || {}),
+    ...Object.keys(pkg.devDependencies || {}),
+  ];
+  const externals = allDeps.filter((dep) => !allowlist.includes(dep));
 
-await esbuild.build({
-  entryPoints: [path.join(root, "server/index.ts")],
-  bundle: true,
-  platform: "node",
-  format: "cjs",
-  outfile: path.join(root, "dist/index.cjs"),
-  packages: "external",
-  alias: {
-    "@shared": "./shared",
-  },
-  plugins: [stubVitePlugin],
+  await esbuild({
+    entryPoints: ["server/index.ts"],
+    platform: "node",
+    bundle: true,
+    format: "cjs",
+    outfile: "dist/index.cjs",
+    define: {
+      "process.env.NODE_ENV": '"production"',
+    },
+    minify: true,
+    external: externals,
+    logLevel: "info",
+  });
+}
+
+buildAll().catch((err) => {
+  console.error(err);
+  process.exit(1);
 });
-
-console.log("Build complete!");

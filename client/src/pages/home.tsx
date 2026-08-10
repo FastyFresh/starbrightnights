@@ -1,40 +1,31 @@
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
-import { trackEvent } from "../lib/analytics";
 
 // Assets
 import heroImage from "@/assets/hero-image.png";
 import blackKneeling from "@/assets/starbright-black-kneeling.png";
 import blackBikini from "@/assets/starbright-blackbikini.png";
 import redBikini from "@/assets/starbright-redbikini.png";
-import yellowBikini from "@/assets/starbright-yellowbikini.png";
-import pinkStanding from "@/assets/starbright-pink-standing.png";
-import redShorts from "@/assets/starbright-redshorts.png";
+import pinkStanding from "@/assets/starbright-red-lace-selfie.png";
 import corsetFront from "@/assets/starbright-corset-front.png";
 import corsetBack from "@/assets/starbright-corset-back.png";
-import sailor from "@/assets/starbright-sailor.png";
-import redBed from "@/assets/starbright-red-bed.png";
+import sailor from "@/assets/starbright-morning-selfie.png";
+import pedicure from "@/assets/starbright-pedicure.png";
 import closeup from "@/assets/starbright-closeup.png";
-import penthouseFront from "@/assets/starbright-penthouse-front.png";
-import penthouseBack from "@/assets/starbright-penthouse-back.png";
-import smile from "@/assets/starbright-smile.png";
+import smile from "@/assets/starbright-micro-bikini.png";
 
 export default function Home() {
-  const telegramLink = "https://t.me/StarbrightMonroe";
-
-  const trackOutbound = (label: string) => {
-    trackEvent("outbound_click", "telegram", label);
-  };
+  const dfansLink = "https://t.me/StarbrightMonroe";
 
   return (
     <div className="dark-landing">
       <div className="dark-container">
         {/* Main CTA Image */}
-        <a href={telegramLink} target="_blank" rel="noopener noreferrer" className="cta-image-block" data-testid="link-main-cta" onClick={() => trackOutbound("hero_image")}>
-          <img src={smile} alt="Exclusive content" className="cta-image" />
+        <a href={dfansLink} target="_blank" rel="noopener noreferrer" className="cta-image-block" data-testid="link-main-cta">
+          <img src={pinkStanding} alt="Exclusive content" className="cta-image" />
           <div className="cta-overlay-middle">
             <span className="cta-text-hero">...hey, i'm Starbright 🌟</span>
-            <span className="cta-text-multi">i'm 19 going to school in LA</span>
+            <span className="cta-text-multi">i'm 20 going to school in LA</span>
             <span className="cta-text-multi">i model sometimes 📸</span>
             <span className="cta-text-multi">barista by day ☕ dancer by night 💃</span>
             <span className="cta-button-text">click anywhere to connect with me on Telegram</span>
@@ -45,73 +36,37 @@ export default function Home() {
         </a>
 
         {/* Full Width Pink Photo */}
-        <a href={telegramLink} target="_blank" rel="noopener noreferrer" className="cta-image-block" data-testid="link-grid-1" onClick={() => trackOutbound("pink_standing")}>
-          <img src={pinkStanding} alt="Starbright" className="cta-image" />
+        <a href={dfansLink} target="_blank" rel="noopener noreferrer" className="cta-image-block" data-testid="link-grid-1">
+          <img src={smile} alt="Starbright" className="cta-image" />
           <div className="cta-overlay">
             <span className="cta-text">my safe public "post" 😇</span>
           </div>
         </a>
 
         {/* Full Width CTA */}
-        <a href={telegramLink} target="_blank" rel="noopener noreferrer" className="cta-image-block" data-testid="link-cta-2" onClick={() => trackOutbound("sailor")}>
-          <img src={sailor} alt="Exclusive access" className="cta-image" />
-          <div className="cta-overlay-top">
-            <span className="cta-text">i can get goth sometimes lol</span>
-          </div>
+        <a href={dfansLink} target="_blank" rel="noopener noreferrer" className="cta-image-block" data-testid="link-cta-2">
+          <img src={pedicure} alt="Exclusive access" className="cta-image" />
           <div className="cta-overlay">
-            <span className="cta-text">just posted something new 🤭</span>
+            <span className="cta-text">showing off my pedicure</span>
           </div>
         </a>
 
         {/* Red Bed Photo */}
-        <a href={telegramLink} target="_blank" rel="noopener noreferrer" className="cta-image-block" data-testid="link-red-bed" onClick={() => trackOutbound("red_bed")}>
-          <img src={redBed} alt="Starbright" className="cta-image" />
+        <a href={dfansLink} target="_blank" rel="noopener noreferrer" className="cta-image-block" data-testid="link-red-bed">
+          <img src={sailor} alt="Starbright" className="cta-image" />
           <div className="cta-overlay">
-            <span className="cta-text">hotels...yum 🛏️</span>
+            <span className="cta-text">Mornings</span>
           </div>
         </a>
-
-        {/* Two Column Grid */}
-        <div className="photo-grid-2col">
-          <a href={telegramLink} target="_blank" rel="noopener noreferrer" className="grid-item" data-testid="link-grid-5" onClick={() => trackOutbound("yellow_bikini")}>
-            <img src={yellowBikini} alt="Starbright" />
-            <div className="cta-overlay">
-              <span className="cta-text">showing off my favorite yellow two-piece 💛</span>
-            </div>
-          </a>
-          <a href={telegramLink} target="_blank" rel="noopener noreferrer" className="grid-item" data-testid="link-grid-6" onClick={() => trackOutbound("red_shorts")}>
-            <img src={redShorts} alt="Starbright" />
-            <div className="cta-overlay">
-              <span className="cta-text">day lounging playing with my braids</span>
-            </div>
-          </a>
-        </div>
-
-        {/* Penthouse Grid */}
-        <div className="photo-grid-2col">
-          <a href={telegramLink} target="_blank" rel="noopener noreferrer" className="grid-item" data-testid="link-grid-7" onClick={() => trackOutbound("penthouse_front")}>
-            <img src={penthouseFront} alt="Starbright" />
-            <div className="cta-overlay">
-              <span className="cta-text">being a house pet 🐱</span>
-            </div>
-          </a>
-          <a href={telegramLink} target="_blank" rel="noopener noreferrer" className="grid-item" data-testid="link-grid-8" onClick={() => trackOutbound("penthouse_back")}>
-            <img src={penthouseBack} alt="Starbright" />
-            <div className="cta-overlay">
-              <span className="cta-text">...still being a house pet 🐱</span>
-            </div>
-          </a>
-        </div>
 
         {/* Final CTA Button */}
         <div className="final-cta-section">
           <a 
-            href={telegramLink}
+            href={dfansLink}
             className="cta-button-large" 
             target="_blank"
             rel="noopener noreferrer"
             data-testid="button-dfans-main"
-            onClick={() => trackOutbound("cta_button_all_of_me")}
           >
             all of me 💋 <ArrowRight size={20} />
           </a>

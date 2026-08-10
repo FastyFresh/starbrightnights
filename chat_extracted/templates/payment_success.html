@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment Successful</title>
+    <meta http-equiv="refresh" content="3;url={{ chat_url }}">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Inter', -apple-system, system-ui, sans-serif; 
+            text-align: center; 
+            padding: 50px 20px; 
+            background: linear-gradient(180deg, #0a0a0f 0%, #1a0a1f 100%); 
+            min-height: 100vh; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container { 
+            background: #14141f; 
+            padding: 48px 32px; 
+            border-radius: 24px; 
+            max-width: 400px; 
+            width: 100%;
+            border: 1px solid #2a2a3a;
+            box-shadow: 0 20px 60px rgba(232, 121, 249, 0.15); 
+        }
+        h1 { 
+            color: #e879f9; 
+            margin-bottom: 16px; 
+            font-size: 24px;
+            font-weight: 600;
+        }
+        p { color: #a0a0b0; margin: 16px 0; line-height: 1.6; }
+        .emoji { font-size: 72px; margin-bottom: 24px; }
+        .btn { 
+            display: inline-block; 
+            background: linear-gradient(135deg, #e879f9 0%, #a855f7 100%); 
+            color: white; 
+            padding: 16px 40px; 
+            border-radius: 12px; 
+            text-decoration: none; 
+            font-weight: 500; 
+            margin-top: 24px;
+            box-shadow: 0 4px 20px rgba(232, 121, 249, 0.4);
+            transition: all 0.2s;
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 30px rgba(232, 121, 249, 0.5); }
+        .redirect-note { font-size: 13px; color: #606070; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="emoji">💖</div>
+        <h1>Welcome to my inner circle!</h1>
+        <p>Your subscription is now active. I can't wait to share more with you...</p>
+        <a href="{{ chat_url }}" class="btn" id="continueBtn">Continue Chatting</a>
+        <p class="redirect-note">Redirecting automatically...</p>
+    </div>
+    <script>
+        setTimeout(function() {
+            window.location.href = "{{ chat_url }}";
+        }, 2000);
+    </script>
+</body>
+</html>
